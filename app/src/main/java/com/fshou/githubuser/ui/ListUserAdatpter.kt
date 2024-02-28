@@ -1,5 +1,6 @@
 package com.fshou.githubuser.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -30,5 +31,13 @@ class ListUserAdatpter(private var listUser: List<ItemsItem>) :
             .load(avatarUrl)
             .circleCrop()
             .into(holder.binding.imgAvatar)
+
+        val userDetailIntent = Intent(holder.itemView.context,UserDetailActivity::class.java)
+        userDetailIntent.putExtra(UserDetailActivity.EXTRA_USERNAME,login)
+
+        holder.itemView.setOnClickListener {
+            holder.itemView.context.startActivity(userDetailIntent)
+
+        }
     }
 }

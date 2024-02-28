@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class MainViewModel: ViewModel() {
 
-    private var _searchedser = MutableLiveData<List<ItemsItem>>()
-    var searchedUser : LiveData<List<ItemsItem>> = _searchedser
+    private var _searchedUser = MutableLiveData<List<ItemsItem>>()
+    var searchedUser : LiveData<List<ItemsItem>> = _searchedUser
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -22,8 +22,6 @@ class MainViewModel: ViewModel() {
     companion object{
         private const val TAG = "MainViewModel"
     }
-
-
 
 
     fun searchUser(username: String) {
@@ -38,7 +36,7 @@ class MainViewModel: ViewModel() {
                     if (!response.isSuccessful){
                         Log.e(TAG, "OnFailure: ${response.message()}")
                     }
-                    _searchedser.value = response.body()?.items as List<ItemsItem>?
+                    _searchedUser.value = response.body()?.items as List<ItemsItem>?
                 }
 
                 override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {

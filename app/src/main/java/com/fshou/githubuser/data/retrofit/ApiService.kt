@@ -11,7 +11,7 @@ interface ApiService {
         @Query("q") username: String
     ) : Call<SearchUserResponse>
 
-    @GET("user/{username}")
+    @GET("users/{username}")
     fun getUserDetail(
         @Path("username") username: String
     ) : Call<UserDetailResponse>

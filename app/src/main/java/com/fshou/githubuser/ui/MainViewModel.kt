@@ -28,7 +28,7 @@ class MainViewModel: ViewModel() {
 
     fun searchUser(username: String) {
         _isLoading.value = true
-        ApiConfig.getApiService().getUsers(username).apply {
+        ApiConfig.getApiService().getUsersByUsername(username).apply {
             enqueue(object : Callback<SearchUserResponse> {
                 override fun onResponse(
                     call: Call<SearchUserResponse>,
@@ -43,7 +43,7 @@ class MainViewModel: ViewModel() {
 
                 override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
                     _isLoading.value = false
-//                    Log.e(TAG, "OnFailure: ${response.message()}")
+                    Log.e(TAG, "OnFailure: ${t.cause}")
                 }
 
             })

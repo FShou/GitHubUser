@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
                 .editText
                 .setOnEditorActionListener {_,_,_->
                     searchBar.textView.text = searchView.text
+                    if (searchBar.textView.text.toString() == ""){
+                        return@setOnEditorActionListener false
+                    }
                     mainViewModel.searchUser(searchView.text.toString())
                     searchView.hide()
                     false

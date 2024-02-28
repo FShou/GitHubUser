@@ -21,7 +21,11 @@ class UserDetailViewModel: ViewModel() {
         private const val TAG = "UserDetailViewModel"
     }
 
-    fun getUserDetail(username: String){
+    init {
+        getUserDetail(UserDetailActivity.username)
+    }
+
+    private fun getUserDetail(username: String){
         _isLoading.value = true
         ApiConfig.getApiService().getUserDetail(username).apply {
             enqueue(object : Callback<UserDetailResponse> {
@@ -37,8 +41,7 @@ class UserDetailViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
+                    Log.e(TAG,"OnFailure: ${t.message}")                }
 
             })
         }

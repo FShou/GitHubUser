@@ -27,7 +27,6 @@ class FollowerFragment : Fragment() {
             ViewModelProvider.NewInstanceFactory()
         )[FollowerViewModel::class.java]
         followerViewModel.isLoading.observe(requireActivity()) { showLoading(it) }
-
         return binding.root
     }
 

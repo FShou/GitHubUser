@@ -47,7 +47,9 @@ class UserDetailActivity : AppCompatActivity() {
                 // set up ui
                 binding.apply {
                     tvUserName.text = it.login
+                    tvUserName.visibility = View.VISIBLE
                     tvFullName.text = it.name
+                    tvFullName.visibility = View.VISIBLE
                     if (tvFullName.text == "") {
                         tvFullName.text = it.login
                     }

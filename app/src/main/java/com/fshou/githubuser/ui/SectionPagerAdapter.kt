@@ -10,7 +10,7 @@ class SectionPagerAdapter(activity: UserDetailActivity) : FragmentStateAdapter(a
     override fun createFragment(position: Int): Fragment {
         val fragment = FollowerFragment()
         fragment.arguments = Bundle().apply {
-            putInt(FollowerFragment.ARGS_SECTION_NUMBER, position)
+            putInt(FollowerFragment.ARG_SECTION_NUMBER, position + 1)
         }
         return fragment
     }

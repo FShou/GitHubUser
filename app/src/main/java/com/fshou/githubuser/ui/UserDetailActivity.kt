@@ -35,9 +35,8 @@ class UserDetailActivity : AppCompatActivity() {
         )[UserDetailViewModel::class.java]
 
         val sectionsPagerAdapter = SectionPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabs,viewPager){ tab,position ->
+        binding.viewPager.adapter = sectionsPagerAdapter
+        TabLayoutMediator(binding.tabs,binding.viewPager){ tab,position ->
             tab.text = TAB_TITLE[position]
         }.attach()
 

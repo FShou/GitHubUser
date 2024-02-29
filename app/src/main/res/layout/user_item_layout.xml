@@ -34,6 +34,7 @@
             card_view:layout_constraintTop_toTopOf="@+id/img_avatar" />
 
         <TextView
+            android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:drawableStartCompat="@drawable/round_arrow_forward_ios_24"

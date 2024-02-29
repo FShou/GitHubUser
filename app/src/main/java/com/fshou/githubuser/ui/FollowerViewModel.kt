@@ -39,7 +39,7 @@ class FollowerViewModel : ViewModel() {
                         return
                     }
                     _followerList.value = response.body()
-                    Log.d("FOLLOWER", followerList.value.toString())
+//                    Log.d("FOLLOWER", followerList.value.toString())
                 }
 
                 override fun onFailure(call: Call<List<UserFollowersResponseItem>>, t: Throwable) {
@@ -64,7 +64,7 @@ class FollowerViewModel : ViewModel() {
                         return
                     }
                     _followingList.value = response.body()
-                    Log.d("FOLLOWING", _followingList.value.toString())
+//                    Log.d("FOLLOWING", _followingList.value.toString())
                 }
 
                 override fun onFailure(call: Call<List<UserFollowersResponseItem>>, t: Throwable) {

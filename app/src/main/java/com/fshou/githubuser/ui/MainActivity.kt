@@ -47,9 +47,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUserList(userList: List<User>) {
         val userListAdapter = UserListAdapter(userList)
-        binding.apply {
-            rvUserList.layoutManager = LinearLayoutManager(this@MainActivity)
-            rvUserList.adapter = userListAdapter
+        binding.rvUserList.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = userListAdapter
         }
     }
 

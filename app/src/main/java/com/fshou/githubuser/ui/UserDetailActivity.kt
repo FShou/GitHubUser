@@ -45,7 +45,7 @@ class UserDetailActivity : AppCompatActivity() {
         userDetailViewModel.apply {
             userDetail.observe(this@UserDetailActivity) {
                 // set up ui
-                binding.apply {
+              binding.apply {
                     tvUserName.text = it.login
                     tvUserName.visibility = View.VISIBLE
                     tvFullName.text = it.name

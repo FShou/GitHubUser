@@ -8,25 +8,25 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.response.User
-import com.fshou.githubuser.databinding.FragmentFollowerBinding
+import com.fshou.githubuser.databinding.FragmentFollowBinding
 
 
-class FollowerFragment : Fragment() {
+class FollowFragment : Fragment() {
 
-    private lateinit var binding: FragmentFollowerBinding
-    private lateinit var followerViewModel: FollowerViewModel
+    private lateinit var binding: FragmentFollowBinding
+    private lateinit var followViewModel: FollowViewModel
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowerBinding.inflate(inflater, container, false)
-        followerViewModel = ViewModelProvider(
+        binding = FragmentFollowBinding.inflate(inflater, container, false)
+        followViewModel = ViewModelProvider(
             requireActivity(),
             ViewModelProvider.NewInstanceFactory()
-        )[FollowerViewModel::class.java]
-        followerViewModel.isLoading.observe(requireActivity()) { showLoading(it) }
+        )[FollowViewModel::class.java]
+        followViewModel.isLoading.observe(requireActivity()) { showLoading(it) }
         return binding.root
     }
 
@@ -36,13 +36,13 @@ class FollowerFragment : Fragment() {
         val index = arguments?.getInt(ARG_SECTION_NUMBER)
         if (index == 1) {
             // get Follower List show to ui
-            followerViewModel.apply {
+            followViewModel.apply {
                 getFollowerByUserName(UserDetailActivity.username)
                 followerList.observe(requireActivity()) { setUserList(it) }
             }
         } else {
             // get following List show to ui
-            followerViewModel.apply {
+            followViewModel.apply {
                 getFollowingByUserName(UserDetailActivity.username)
                 followingList.observe(requireActivity()) { setUserList(it) }
             }

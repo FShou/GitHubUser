@@ -8,9 +8,9 @@ class SectionPagerAdapter(activity: UserDetailActivity) : FragmentStateAdapter(a
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        val fragment = FollowerFragment()
+        val fragment = FollowFragment()
         fragment.arguments = Bundle().apply {
-            putInt(FollowerFragment.ARG_SECTION_NUMBER, position + 1)
+            putInt(FollowFragment.ARG_SECTION_NUMBER, position + 1)
         }
         return fragment
     }

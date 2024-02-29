@@ -2,13 +2,19 @@ package com.fshou.githubuser.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class UserFollowersResponse(
+data class GitHubUserResponse(
 
-	@field:SerializedName("UserFollowersResponse")
-	var userFollowersResponse: List<UserFollowersResponseItem?>? = null
+	@field:SerializedName("total_count")
+	val totalCount: Int? = null,
+
+	@field:SerializedName("incomplete_results")
+	val incompleteResults: Boolean? = null,
+
+	@field:SerializedName("items")
+	val items: List<User?>? = null
 )
 
-data class UserFollowersResponseItem(
+data class User(
 
 	@field:SerializedName("gists_url")
 	val gistsUrl: String? = null,
@@ -36,6 +42,9 @@ data class UserFollowersResponseItem(
 
 	@field:SerializedName("subscriptions_url")
 	val subscriptionsUrl: String? = null,
+
+	@field:SerializedName("score")
+	val score: Any? = null,
 
 	@field:SerializedName("received_events_url")
 	val receivedEventsUrl: String? = null,

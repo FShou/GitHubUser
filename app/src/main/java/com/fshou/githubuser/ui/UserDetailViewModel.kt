@@ -10,9 +10,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserDetailViewModel: ViewModel() {
+class UserDetailViewModel : ViewModel() {
     private var _userDetail = MutableLiveData<UserDetailResponse>()
-    var userDetail : LiveData<UserDetailResponse> = _userDetail
+    var userDetail: LiveData<UserDetailResponse> = _userDetail
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -25,26 +25,28 @@ class UserDetailViewModel: ViewModel() {
         getUserDetail(UserDetailActivity.username)
     }
 
-    private fun getUserDetail(username: String){
+    private fun getUserDetail(username: String) {
         _isLoading.value = true
-        ApiConfig.getApiService().getUserDetail(username).apply {
-            enqueue(object : Callback<UserDetailResponse> {
+        ApiConfig
+            .getApiService()
+            .getUserDetail(username)
+            .enqueue(object : Callback<UserDetailResponse> {
                 override fun onResponse(
                     call: Call<UserDetailResponse>,
                     response: Response<UserDetailResponse>
                 ) {
                     _isLoading.value = false
-                    if (!response.isSuccessful){
+                    if (!response.isSuccessful) {
                         Log.e(TAG, "OnFailure: ${response.message()}")
                     }
                     _userDetail.value = response.body()
                 }
 
                 override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
-                    Log.e(TAG,"OnFailure: ${t.message}")                }
+                    _isLoading.value = false
+                    Log.e(TAG, "OnFailure: ${t.message}")
+                }
 
             })
-        }
-
     }
 }

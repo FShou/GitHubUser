@@ -34,34 +34,41 @@ class UserDetailActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         )[UserDetailViewModel::class.java]
 
-        val sectionsPagerAdapter = SectionPagerAdapter(this)
+        val sectionsPagerAdapter = SectionPagerAdapter(this@UserDetailActivity)
         binding.viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabs,binding.viewPager){ tab,position ->
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = TAB_TITLE[position]
         }.attach()
 
 
-        userDetailViewModel.userDetail.observe(this) {
-           binding.apply {
-                tvUserName.text = it.login
-                tvFullName.text = it.name
-                if (tvFullName.text == "") {
-                    tvFullName.text = it.login
+        // setup observers
+        userDetailViewModel.apply {
+            userDetail.observe(this@UserDetailActivity) {
+                // set up ui
+                binding.apply {
+                    tvUserName.text = it.login
+                    tvFullName.text = it.name
+                    if (tvFullName.text == "") {
+                        tvFullName.text = it.login
+                    }
+                    Glide.with(this@UserDetailActivity)
+                        .load(it?.avatarUrl)
+                        .circleCrop()
+                        .into(imgAvatar)
                 }
+            }
 
-                Glide.with(this@UserDetailActivity)
-                    .load(it?.avatarUrl)
-                    .circleCrop()
-                    .into(imgAvatar)
+            isLoading.observe(this@UserDetailActivity) {
+                showLoading(it)
             }
         }
+    }
 
-        userDetailViewModel.isLoading.observe(this) {
-            if (it) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 

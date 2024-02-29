@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.response.User
 import com.fshou.githubuser.databinding.FragmentFollowBinding
@@ -14,7 +15,7 @@ import com.fshou.githubuser.databinding.FragmentFollowBinding
 class FollowFragment : Fragment() {
 
     private lateinit var binding: FragmentFollowBinding
-    private lateinit var followViewModel: FollowViewModel
+    private  val followViewModel by viewModels<FollowViewModel>()
 
 
     override fun onCreateView(
@@ -22,10 +23,6 @@ class FollowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFollowBinding.inflate(inflater, container, false)
-        followViewModel = ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.NewInstanceFactory()
-        )[FollowViewModel::class.java]
         followViewModel.isLoading.observe(requireActivity()) { showLoading(it) }
         return binding.root
     }
@@ -61,7 +58,6 @@ class FollowFragment : Fragment() {
             layoutManager = rvFollowerLayoutManager
             adapter = userListAdapter
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {

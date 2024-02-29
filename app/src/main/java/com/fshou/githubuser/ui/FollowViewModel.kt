@@ -27,10 +27,10 @@ class FollowViewModel : ViewModel() {
 
     fun getFollowerByUserName(username: String) {
         _isLoading.value = true
-        ApiConfig.getApiService().getUserFollower(username).enqueue(object : Callback<List<User>> {
-                override fun onResponse(
-                    call: Call<List<User>>, response: Response<List<User>>
-                ) {
+        ApiConfig.getApiService().getUserFollower(username)
+            .enqueue(object : Callback<List<User>> {
+
+                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     _isLoading.value = false
                     if (!response.isSuccessful) {
                         Log.e(TAG, response.message())
@@ -49,10 +49,10 @@ class FollowViewModel : ViewModel() {
 
     fun getFollowingByUserName(username: String) {
         _isLoading.value = true
-        ApiConfig.getApiService().getUserFollowing(username).enqueue(object : Callback<List<User>> {
-                override fun onResponse(
-                    call: Call<List<User>>, response: Response<List<User>>
-                ) {
+        ApiConfig.getApiService().getUserFollowing(username)
+            .enqueue(object : Callback<List<User>> {
+
+                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     _isLoading.value = false
                     if (!response.isSuccessful) {
                         Log.e(TAG, response.message())

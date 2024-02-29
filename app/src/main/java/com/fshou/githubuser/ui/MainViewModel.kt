@@ -23,17 +23,17 @@ class MainViewModel : ViewModel() {
         private const val TAG = "MainViewModel"
     }
 
+    init {
+        searchUser()
+    }
 
-    fun searchUser(username: String) {
+
+    fun searchUser(username: String = "sidiq") {
         _isLoading.value = true
-        ApiConfig
-            .getApiService()
-            .getUsersByUsername(username)
+        ApiConfig.getApiService().getUsersByUsername(username)
             .enqueue(object : Callback<GitHubUserResponse> {
-                override fun onResponse(
-                    call: Call<GitHubUserResponse>,
-                    response: Response<GitHubUserResponse>
-                ) {
+
+                override fun onResponse(call: Call<GitHubUserResponse>, response: Response<GitHubUserResponse>) {
                     _isLoading.value = false
                     if (!response.isSuccessful) {
                         Log.e(TAG, "OnFailure: ${response.message()}")
@@ -47,6 +47,5 @@ class MainViewModel : ViewModel() {
                 }
 
             })
-
     }
 }

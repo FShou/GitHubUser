@@ -27,14 +27,10 @@ class UserDetailViewModel : ViewModel() {
 
     private fun getUserDetail(username: String) {
         _isLoading.value = true
-        ApiConfig
-            .getApiService()
-            .getUserDetail(username)
+        ApiConfig.getApiService().getUserDetail(username)
             .enqueue(object : Callback<UserDetailResponse> {
-                override fun onResponse(
-                    call: Call<UserDetailResponse>,
-                    response: Response<UserDetailResponse>
-                ) {
+
+                override fun onResponse(call: Call<UserDetailResponse>, response: Response<UserDetailResponse>) {
                     _isLoading.value = false
                     if (!response.isSuccessful) {
                         Log.e(TAG, "OnFailure: ${response.message()}")

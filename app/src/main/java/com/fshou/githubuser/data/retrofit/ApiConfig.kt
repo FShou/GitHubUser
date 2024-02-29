@@ -1,5 +1,6 @@
 package com.fshou.githubuser.data.retrofit
 
+import com.fshou.githubuser.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +17,7 @@ class ApiConfig {
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "Bearer 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")
+                    .addHeader("Authorization", "Bearer ${BuildConfig.API_KEY}")
                     .build()
                 chain.proceed(requestHeaders)
             }
@@ -27,7 +28,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

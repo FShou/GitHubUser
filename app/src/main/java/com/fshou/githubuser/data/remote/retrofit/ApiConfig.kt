@@ -1,4 +1,4 @@
-package com.fshou.githubuser.data.retrofit
+package com.fshou.githubuser.data.remote.retrofit
 
 import com.fshou.githubuser.BuildConfig
 import okhttp3.Interceptor

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.fshou.githubuser.data.response.User
+import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.UserItemLayoutBinding
 
 class UserListAdapter(private var userList: List<User>) :

@@ -1,9 +1,9 @@
-package com.fshou.githubuser.data.retrofit
+package com.fshou.githubuser.data.remote.retrofit
 
 
-import com.fshou.githubuser.data.response.User
-import com.fshou.githubuser.data.response.GitHubUserResponse
-import com.fshou.githubuser.data.response.UserDetailResponse
+import com.fshou.githubuser.data.remote.response.User
+import com.fshou.githubuser.data.remote.response.GitHubUserResponse
+import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.*
 interface ApiService {
@@ -12,10 +12,20 @@ interface ApiService {
         @Query("q") username: String
     ) : Call<GitHubUserResponse>
 
+    @GET("search/users")
+    suspend fun getSearchUser(
+        @Query("q") username: String
+    ): GitHubUserResponse
+
+    @GET("users/{username}")
+    suspend fun getUserDetailNew(
+        @Path("username") username: String
+    ) : UserDetailResponse
     @GET("users/{username}")
     fun getUserDetail(
         @Path("username") username: String
     ) : Call<UserDetailResponse>
+
 
     @GET("users/{username}/followers")
     fun getUserFollower(

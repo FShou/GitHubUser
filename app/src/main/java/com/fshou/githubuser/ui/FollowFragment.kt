@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fshou.githubuser.data.response.User
+import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.FragmentFollowBinding
 
 

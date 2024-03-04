@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.fshou.githubuser.R
-import com.fshou.githubuser.data.response.UserDetailResponse
+import com.fshou.githubuser.data.local.entity.FavoriteUser
+import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.databinding.ActivityUserDetailBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -18,7 +21,7 @@ class UserDetailActivity : AppCompatActivity() {
         const val EXTRA_USERNAME = "username"
         lateinit var username: String
         private val TAB_TITLE = intArrayOf(
-           R.string.follower,
+            R.string.follower,
             R.string.following
         )
     }
@@ -45,13 +48,14 @@ class UserDetailActivity : AppCompatActivity() {
             isLoading.observe(this@UserDetailActivity) { showLoading(it) }
             toastText.observe(this@UserDetailActivity) {
                 it.getContentIfNotHandled().let { toastText ->
-                    Toast.makeText(this@UserDetailActivity,toastText,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@UserDetailActivity, toastText, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
     }
 
-    private fun showUserDetail(user: UserDetailResponse){
+    private fun showUserDetail(user: UserDetailResponse) {
         binding.apply {
             tvUserName.text = user.login
             tvFullName.text = user.name
@@ -63,6 +67,29 @@ class UserDetailActivity : AppCompatActivity() {
             tvTotalFollowing.visibility = View.VISIBLE
             tvFullName.visibility = View.VISIBLE
             tvUserName.visibility = View.VISIBLE
+
+
+            val newUser = FavoriteUser(
+                user.login,
+                user.avatarUrl
+            )
+            val factory = ViewModelFactory.getInstance(this@UserDetailActivity)
+            val viewModelNew: UserDetailViewModelNew by viewModels { factory }
+
+//            var isFavoriteUSer: Boolean = false
+            fab.setOnClickListener {
+                viewModelNew.viewModelScope.launch {
+                    val isFavoriteUSer = viewModelNew.isFavoriteUSer(user.login)
+                    if (isFavoriteUSer){
+                        fab.setImageResource(R.drawable.favorite)
+                    }else{
+                        viewModelNew.addUser(newUser)
+                    }
+                }
+            }
+
+
+
 
             if (tvFullName.text == "") {
                 tvFullName.text = user.login

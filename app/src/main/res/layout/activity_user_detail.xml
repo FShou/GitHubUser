@@ -55,9 +55,10 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_followers"
             app:tabTextColor="?attr/colorPrimary" />
 
         <ProgressBar
@@ -71,6 +72,33 @@
             app:layout_constraintTop_toTopOf="@id/img_avatar"
             tools:visibility="visible" />
 
+        <TextView
+            android:id="@+id/tv_total_followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_followers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/tv_total_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_following"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

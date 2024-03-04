@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fshou.githubuser.data.response.UserDetailResponse
 import com.fshou.githubuser.data.retrofit.ApiConfig
+import com.fshou.githubuser.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +18,8 @@ class UserDetailViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _toastText = MutableLiveData<Event<String>>()
+    val toastText: LiveData<Event<String>> = _toastText
     companion object {
         private const val TAG = "UserDetailViewModel"
     }
@@ -40,6 +43,7 @@ class UserDetailViewModel : ViewModel() {
 
                 override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
                     _isLoading.value = false
+                    _toastText.value = Event("Failed to Load User Detail")
                     Log.e(TAG, "OnFailure: ${t.message}")
                 }
 

@@ -7,4 +7,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="follower">Follower</string>
     <string name="following">Following</string>
+    <string name="total_followers">Total Followers</string>
+    <string name="total_following">Total Following</string>
 </resources>

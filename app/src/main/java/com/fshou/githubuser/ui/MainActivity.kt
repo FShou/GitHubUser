@@ -3,8 +3,8 @@ package com.fshou.githubuser.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.response.User
 import com.fshou.githubuser.databinding.ActivityMainBinding
@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.apply {
             searchedUser.observe(this@MainActivity) { setUserList(it) }
             isLoading.observe(this@MainActivity) { showLoading(it) }
+            toastText.observe(this@MainActivity) {
+                it.getContentIfNotHandled()?.let { toastText ->
+                    Toast.makeText(this@MainActivity,toastText, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // configure search bar & searchview

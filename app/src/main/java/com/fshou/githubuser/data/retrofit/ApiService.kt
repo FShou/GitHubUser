@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.http.*
 interface ApiService {
     @GET("search/users")
-    fun getUsersByUsername(
+    fun getUsers(
         @Query("q") username: String
     ) : Call<GitHubUserResponse>
 

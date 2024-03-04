@@ -15,9 +15,7 @@ class UserListAdapter(private var userList: List<User>) :
     var showArrow = true
     var addIntent = true
 
-    class ListViewHolder(var binding: UserItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+    class ListViewHolder(var binding: UserItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = UserItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)

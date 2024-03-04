@@ -3,6 +3,7 @@ package com.fshou.githubuser.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.fshou.githubuser.R
@@ -42,15 +43,27 @@ class UserDetailActivity : AppCompatActivity() {
         userDetailViewModel.apply {
             userDetail.observe(this@UserDetailActivity) { showUserDetail(it) }
             isLoading.observe(this@UserDetailActivity) { showLoading(it) }
+            toastText.observe(this@UserDetailActivity) {
+                it.getContentIfNotHandled().let { toastText ->
+                    Toast.makeText(this@UserDetailActivity,toastText,Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
     private fun showUserDetail(user: UserDetailResponse){
         binding.apply {
             tvUserName.text = user.login
-            tvUserName.visibility = View.VISIBLE
             tvFullName.text = user.name
+            val formattedFollowers = String.format("%,d Followers", user.followers)
+            val formattedFollowing = String.format("%,d Following", user.following)
+            tvTotalFollowers.text = formattedFollowers
+            tvTotalFollowing.text = formattedFollowing
+            tvTotalFollowers.visibility = View.VISIBLE
+            tvTotalFollowing.visibility = View.VISIBLE
             tvFullName.visibility = View.VISIBLE
+            tvUserName.visibility = View.VISIBLE
+
             if (tvFullName.text == "") {
                 tvFullName.text = user.login
             }

@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,10 +10,11 @@ import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.utils.Event
 import kotlinx.coroutines.launch
 
-class MainViewModelNew(private val favoriteUserRepository: FavoriteUserRepository) : ViewModel() {
+class MainViewModel(private val favoriteUserRepository: FavoriteUserRepository) : ViewModel() {
 
     private var _searchedUser = MutableLiveData<Result<List<User>>>()
     var searchedUser: LiveData<Result<List<User>>> = _searchedUser
+
     init {
         searchUsers()
     }

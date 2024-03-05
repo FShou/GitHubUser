@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view_model
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -13,8 +13,8 @@ class ViewModelFactory private constructor(private val favoriteUserRepository: F
         when {
             modelClass.isAssignableFrom(UserDetailViewModel::class.java) -> return UserDetailViewModel(favoriteUserRepository) as T
             modelClass.isAssignableFrom(FavoriteUserViewModel::class.java) -> return FavoriteUserViewModel(favoriteUserRepository) as T
-            modelClass.isAssignableFrom(MainViewModelNew::class.java) -> return MainViewModelNew(favoriteUserRepository) as T
-            modelClass.isAssignableFrom(FollowViewModelNew::class.java) -> return FollowViewModelNew(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> return MainViewModel(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(FollowViewModel::class.java) -> return FollowViewModel(favoriteUserRepository) as T
         }
 
 

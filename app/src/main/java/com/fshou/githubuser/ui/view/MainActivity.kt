@@ -1,28 +1,32 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.R
 import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.data.remote.response.User
-import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.databinding.ActivityMainBinding
-import kotlinx.coroutines.launch
+import com.fshou.githubuser.ui.view_model.MainViewModel
+import com.fshou.githubuser.ui.adapter.UserListAdapter
+import com.fshou.githubuser.ui.view_model.SettingsViewModel
+import com.fshou.githubuser.ui.view_model.SettingsViewModelFactory
+import com.fshou.githubuser.ui.view_model.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel by viewModels<MainViewModel>()
 
-    private val viewModel by viewModels<MainViewModelNew> {
+    private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(application)
+    }
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory.getInstance(application)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +37,13 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.searchedUser.observe(this@MainActivity) {
             resultHandle(it)
+        }
+        settingsViewModel.getThemeSettings().observe(this) {
+            if (it){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
 
         // configure search bar & searchview
@@ -56,7 +67,11 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                         true
                     }
-
+                    R.id.settings -> {
+                        val intent = Intent(this@MainActivity,SettingsActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
                     else -> false
                 }
             }

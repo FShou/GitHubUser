@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.UserItemLayoutBinding
+import com.fshou.githubuser.ui.view.UserDetailActivity
 
 class UserListAdapter(private var userList: List<User>) :
     RecyclerView.Adapter<UserListAdapter.ListViewHolder>() {

@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

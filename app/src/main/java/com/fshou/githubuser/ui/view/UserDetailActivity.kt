@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +12,9 @@ import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.databinding.ActivityUserDetailBinding
+import com.fshou.githubuser.ui.adapter.SectionPagerAdapter
+import com.fshou.githubuser.ui.view_model.UserDetailViewModel
+import com.fshou.githubuser.ui.view_model.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 

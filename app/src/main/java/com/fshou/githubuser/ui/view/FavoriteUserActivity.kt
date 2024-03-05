@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityFavoriteUserBinding
+import com.fshou.githubuser.ui.view_model.FavoriteUserViewModel
+import com.fshou.githubuser.ui.adapter.UserListAdapter
+import com.fshou.githubuser.ui.view_model.ViewModelFactory
 
 class FavoriteUserActivity : AppCompatActivity() {
 

@@ -1,13 +1,12 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import com.bumptech.glide.Glide.init
 import com.fshou.githubuser.data.FavoriteUserRepository
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.data.Result
+import com.fshou.githubuser.ui.view.UserDetailActivity
 
 class UserDetailViewModel(private val favoriteUserRepository: FavoriteUserRepository) :
     ViewModel() {

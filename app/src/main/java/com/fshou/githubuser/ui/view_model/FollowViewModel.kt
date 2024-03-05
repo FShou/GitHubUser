@@ -1,12 +1,13 @@
-package com.fshou.githubuser.ui
+package com.fshou.githubuser.ui.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fshou.githubuser.data.FavoriteUserRepository
 import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.data.remote.response.User
+import com.fshou.githubuser.ui.view.UserDetailActivity
 
-class FollowViewModelNew (private val favoriteUserRepository: FavoriteUserRepository): ViewModel() {
+class FollowViewModel (private val favoriteUserRepository: FavoriteUserRepository): ViewModel() {
     lateinit var followerList : LiveData<Result<List<User>>>
     lateinit var followingList : LiveData<Result<List<User>>>
 

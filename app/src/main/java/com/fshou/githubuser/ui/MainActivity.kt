@@ -1,5 +1,6 @@
 package com.fshou.githubuser.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fshou.githubuser.R
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityMainBinding
 
@@ -42,6 +44,17 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.searchUser(searchView.text.toString())
                 searchView.hide()
                 false
+            }
+            searchBar.inflateMenu(R.menu.favorite_menu)
+            searchBar.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.favorite_user -> {
+                        val intent = Intent(this@MainActivity,FavoriteUserActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    else -> false
+                }
             }
         }
     }

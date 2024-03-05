@@ -35,6 +35,8 @@ class FavoriteUserRepository private constructor(
         favoriteUserDao.deleteUser(user)
     }
 
+     fun getFavoriteUsers(): LiveData<List<FavoriteUser>> = favoriteUserDao.getFavoriteUsers()
+
     fun getUserDetail(username: String): LiveData<Result<UserDetailResponse>> =
         liveData {
             emit(Result.Loading)

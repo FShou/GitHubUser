@@ -9,4 +9,5 @@
     <string name="following">Following</string>
     <string name="total_followers">Total Followers</string>
     <string name="total_following">Total Following</string>
+    <string name="favorite">Favorite</string>
 </resources>

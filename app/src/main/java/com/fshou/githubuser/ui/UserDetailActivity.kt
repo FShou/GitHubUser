@@ -28,9 +28,12 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityUserDetailBinding
-    private val userDetailViewModel by viewModels<UserDetailViewModel>()
     private val user = FavoriteUser()
-
+    private val viewModelNew: UserDetailViewModelNew by viewModels {
+        ViewModelFactory.getInstance(
+            application
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,31 +41,29 @@ class UserDetailActivity : AppCompatActivity() {
 
         username = intent.getStringExtra(EXTRA_USERNAME).toString()
 
-
-        val factory = ViewModelFactory.getInstance(this@UserDetailActivity)
-        val viewModelNew: UserDetailViewModelNew by viewModels { factory }
         viewModelNew.apply {
             userDetail.observe(this@UserDetailActivity) {
                 handleUserDetail(it)
             }
-            isFavoriteUser(username).observe(this@UserDetailActivity) { isFavoriteUser ->
-                setFabIcon(isFavoriteUser)
+
+            isFavoriteUser(username).observe(this@UserDetailActivity) { itFavorite ->
+                setFabIcon(itFavorite)
             }
         }
 
         binding.fab.setOnClickListener {
-           viewModelNew.isFavoriteUser(username).observe(this) { isFavorite ->
-               if (isFavorite){
-                   viewModelNew.viewModelScope.launch {
-                    viewModelNew.deleteUser(user)
-                   }
-               }else {
-                   viewModelNew.viewModelScope.launch {
-                       viewModelNew.addUser(user)
-                   }
-               }
-               setFabIcon(!isFavorite)
-           }
+            viewModelNew.isFavoriteUser(username).observe(this@UserDetailActivity) { isFavorite ->
+                if (isFavorite) {
+                    viewModelNew.viewModelScope.launch {
+                        viewModelNew.deleteUser(user)
+                    }
+                } else {
+                    viewModelNew.viewModelScope.launch {
+                        viewModelNew.addUser(user)
+                    }
+                }
+                setFabIcon(!isFavorite)
+            }
         }
 
         val sectionsPagerAdapter = SectionPagerAdapter(this@UserDetailActivity)

@@ -15,6 +15,7 @@ class ViewModelFactory private constructor(private val favoriteUserRepository: F
             modelClass.isAssignableFrom(FavoriteUserViewModel::class.java) -> return FavoriteUserViewModel(favoriteUserRepository) as T
             modelClass.isAssignableFrom(MainViewModel::class.java) -> return MainViewModel(favoriteUserRepository) as T
             modelClass.isAssignableFrom(FollowViewModel::class.java) -> return FollowViewModel(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(SettingsViewModel::class.java) -> return SettingsViewModel(favoriteUserRepository) as T
         }
 
 

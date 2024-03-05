@@ -16,12 +16,11 @@ class FollowViewModel (private val favoriteUserRepository: FavoriteUserRepositor
         getFollowingList(UserDetailActivity.username)
     }
 
-
-    fun getFollowerList(username: String) {
+    private fun getFollowerList(username: String) {
         followerList = favoriteUserRepository.getFollowers(username)
     }
 
-    fun getFollowingList(username: String) {
+    private fun getFollowingList(username: String) {
         followingList = favoriteUserRepository.getFollowing(username)
     }
 

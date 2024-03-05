@@ -5,16 +5,15 @@ import android.os.Bundle
 import android.widget.CompoundButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
-import com.fshou.githubuser.R
 import com.fshou.githubuser.databinding.ActivitySettingsBinding
 import com.fshou.githubuser.ui.view_model.SettingsViewModel
-import com.fshou.githubuser.ui.view_model.SettingsViewModelFactory
+import com.fshou.githubuser.ui.view_model.ViewModelFactory
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
     private val viewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory.getInstance(application)
+        ViewModelFactory.getInstance(application)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

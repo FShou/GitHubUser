@@ -23,7 +23,7 @@ class MainViewModel(private val favoriteUserRepository: FavoriteUserRepository) 
         _searchedUser.value = Result.Loading
         try {
             viewModelScope.launch {
-                _searchedUser.value = Result.Success(favoriteUserRepository.getUsersNew(username))
+                _searchedUser.value = Result.Success(favoriteUserRepository.getUsers(username))
             }
         }catch (e: Exception){
             _searchedUser.value = Result.Error(Event(e.message.toString()))

@@ -16,6 +16,7 @@
 
         <ImageView
             android:id="@+id/img_avatar"
+            android:contentDescription="@string/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             card_view:layout_constraintBottom_toBottomOf="parent"

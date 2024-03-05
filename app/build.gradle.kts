@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.konan.properties.Properties
+
 
 plugins {
     id("com.android.application")

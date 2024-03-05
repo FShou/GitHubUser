@@ -4,11 +4,11 @@
     <string name="searchbar_hint">Search Username</string>
     <string name="full_name">Full Name</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="total_followers">Total Followers</string>
     <string name="total_following">Total Following</string>
     <string name="favorite">Favorite</string>
     <string name="settings">Settings</string>
+    <string name="avatar">Avatar</string>
 </resources>

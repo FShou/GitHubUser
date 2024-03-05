@@ -2,6 +2,8 @@ package com.fshou.githubuser.di
 
 import android.content.Context
 import com.fshou.githubuser.data.FavoriteUserRepository
+import com.fshou.githubuser.data.local.datastore.SettingPreferences
+import com.fshou.githubuser.data.local.datastore.dataStore
 import com.fshou.githubuser.data.local.room.FavoriteUserRoomDatabase
 import com.fshou.githubuser.data.remote.retrofit.ApiConfig
 
@@ -10,7 +12,8 @@ object Injection {
         val apiService = ApiConfig.getApiService()
         val database = FavoriteUserRoomDatabase.getDatabase(context)
         val dao = database.favoriteUserDao()
+        val settingPreferences = SettingPreferences.getInstance(context.dataStore)
 //        val appExecutors = AppExecutors()
-        return FavoriteUserRepository.getInstance(apiService, dao)
+        return FavoriteUserRepository.getInstance(apiService, dao, settingPreferences)
     }
 }

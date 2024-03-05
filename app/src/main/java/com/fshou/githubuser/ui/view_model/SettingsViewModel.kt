@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.fshou.githubuser.data.local.datastore.SettingPreferences
+import com.fshou.githubuser.data.FavoriteUserRepository
 import kotlinx.coroutines.launch
 
-class SettingsViewModel(private val pref : SettingPreferences) : ViewModel(){
+class SettingsViewModel(private val favoriteUserRepository: FavoriteUserRepository) : ViewModel(){
     fun getThemeSettings(): LiveData<Boolean> {
-        return pref.getThemeSetting().asLiveData()
+        return favoriteUserRepository.getThemeSetting().asLiveData()
     }
 
     fun saveThemeSetting(isDarkModeActive: Boolean) {
         viewModelScope.launch {
-            pref.saveThemeSetting(isDarkModeActive)
+            favoriteUserRepository.saveThemeSetting(isDarkModeActive)
         }
     }
 }

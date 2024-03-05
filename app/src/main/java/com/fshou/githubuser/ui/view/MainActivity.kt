@@ -16,7 +16,6 @@ import com.fshou.githubuser.databinding.ActivityMainBinding
 import com.fshou.githubuser.ui.view_model.MainViewModel
 import com.fshou.githubuser.ui.adapter.UserListAdapter
 import com.fshou.githubuser.ui.view_model.SettingsViewModel
-import com.fshou.githubuser.ui.view_model.SettingsViewModelFactory
 import com.fshou.githubuser.ui.view_model.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(application)
     }
     private val settingsViewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory.getInstance(application)
+        ViewModelFactory.getInstance(application)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,14 +104,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvUserList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = userListAdapter
-        }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) {
-            View.VISIBLE
-        } else {
-            View.GONE
         }
     }
 }

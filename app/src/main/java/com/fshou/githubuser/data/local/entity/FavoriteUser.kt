@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class FavoriteUser(
 
     @PrimaryKey(autoGenerate = false)
-    val username: String = "",
+    var username: String = "",
 
-    val avatarUrl: String? = null,
+    var avatarUrl: String? = null,
 
-)
+    )

@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.fshou.githubuser.R
+import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.databinding.ActivityUserDetailBinding
@@ -28,11 +29,41 @@ class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserDetailBinding
     private val userDetailViewModel by viewModels<UserDetailViewModel>()
+    private val user = FavoriteUser()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
         username = intent.getStringExtra(EXTRA_USERNAME).toString()
+
+
+        val factory = ViewModelFactory.getInstance(this@UserDetailActivity)
+        val viewModelNew: UserDetailViewModelNew by viewModels { factory }
+        viewModelNew.apply {
+            userDetail.observe(this@UserDetailActivity) {
+                handleUserDetail(it)
+            }
+            isFavoriteUser(username).observe(this@UserDetailActivity) { isFavoriteUser ->
+                setFabIcon(isFavoriteUser)
+            }
+        }
+
+        binding.fab.setOnClickListener {
+           viewModelNew.isFavoriteUser(username).observe(this) { isFavorite ->
+               if (isFavorite){
+                   viewModelNew.viewModelScope.launch {
+                    viewModelNew.deleteUser(user)
+                   }
+               }else {
+                   viewModelNew.viewModelScope.launch {
+                       viewModelNew.addUser(user)
+                   }
+               }
+               setFabIcon(!isFavorite)
+           }
+        }
 
         val sectionsPagerAdapter = SectionPagerAdapter(this@UserDetailActivity)
         binding.apply {
@@ -42,17 +73,40 @@ class UserDetailActivity : AppCompatActivity() {
             }.attach()
         }
 
-        // setup observers
-        userDetailViewModel.apply {
-            userDetail.observe(this@UserDetailActivity) { showUserDetail(it) }
-            isLoading.observe(this@UserDetailActivity) { showLoading(it) }
-            toastText.observe(this@UserDetailActivity) {
-                it.getContentIfNotHandled().let { toastText ->
-                    Toast.makeText(this@UserDetailActivity, toastText, Toast.LENGTH_SHORT).show()
+
+        setContentView(binding.root)
+    }
+
+    private fun setFabIcon(isFavorite: Boolean) {
+        if (isFavorite) {
+            binding.fab.setImageResource(R.drawable.favorite)
+        } else {
+            binding.fab.setImageResource(R.drawable.favorite_border)
+        }
+    }
+
+
+    private fun handleUserDetail(result: Result<UserDetailResponse>) {
+        when (result) {
+            is Result.Loading -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
+            is Result.Error -> {
+                binding.progressBar.visibility = View.GONE
+                val message = result.error.getContentIfNotHandled()
+                if (message != null) {
+                    Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT).show()
                 }
             }
-        }
 
+            is Result.Success -> {
+                binding.progressBar.visibility = View.GONE
+                user.username = result.data.login
+                user.avatarUrl = result.data.avatarUrl
+                showUserDetail(result.data)
+            }
+        }
     }
 
     private fun showUserDetail(user: UserDetailResponse) {
@@ -63,33 +117,11 @@ class UserDetailActivity : AppCompatActivity() {
             val formattedFollowing = String.format("%,d Following", user.following)
             tvTotalFollowers.text = formattedFollowers
             tvTotalFollowing.text = formattedFollowing
+
             tvTotalFollowers.visibility = View.VISIBLE
             tvTotalFollowing.visibility = View.VISIBLE
             tvFullName.visibility = View.VISIBLE
             tvUserName.visibility = View.VISIBLE
-
-
-            val newUser = FavoriteUser(
-                user.login,
-                user.avatarUrl
-            )
-            val factory = ViewModelFactory.getInstance(this@UserDetailActivity)
-            val viewModelNew: UserDetailViewModelNew by viewModels { factory }
-
-//            var isFavoriteUSer: Boolean = false
-            fab.setOnClickListener {
-                viewModelNew.viewModelScope.launch {
-                    val isFavoriteUSer = viewModelNew.isFavoriteUSer(user.login)
-                    if (isFavoriteUSer){
-                        fab.setImageResource(R.drawable.favorite)
-                    }else{
-                        viewModelNew.addUser(newUser)
-                    }
-                }
-            }
-
-
-
 
             if (tvFullName.text == "") {
                 tvFullName.text = user.login
@@ -98,14 +130,6 @@ class UserDetailActivity : AppCompatActivity() {
                 .load(user.avatarUrl)
                 .circleCrop()
                 .into(imgAvatar)
-        }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) {
-            View.VISIBLE
-        } else {
-            View.GONE
         }
     }
 

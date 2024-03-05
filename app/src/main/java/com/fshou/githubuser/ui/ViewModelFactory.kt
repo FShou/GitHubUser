@@ -11,8 +11,10 @@ class ViewModelFactory private constructor(private val favoriteUserRepository: F
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
-            modelClass.isAssignableFrom(UserDetailViewModelNew::class.java) -> return UserDetailViewModelNew(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(UserDetailViewModel::class.java) -> return UserDetailViewModel(favoriteUserRepository) as T
             modelClass.isAssignableFrom(FavoriteUserViewModel::class.java) -> return FavoriteUserViewModel(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(MainViewModelNew::class.java) -> return MainViewModelNew(favoriteUserRepository) as T
+            modelClass.isAssignableFrom(FollowViewModelNew::class.java) -> return FollowViewModelNew(favoriteUserRepository) as T
         }
 
 

@@ -29,7 +29,7 @@ class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserDetailBinding
     private val user = FavoriteUser()
-    private val viewModelNew: UserDetailViewModelNew by viewModels {
+    private val viewModelNew: UserDetailViewModel by viewModels {
         ViewModelFactory.getInstance(
             application
         )
@@ -37,7 +37,8 @@ class UserDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUserDetailBinding.inflate(layoutInflater)
+
+      binding = ActivityUserDetailBinding.inflate(layoutInflater)
 
         username = intent.getStringExtra(EXTRA_USERNAME).toString()
 

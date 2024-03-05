@@ -13,7 +13,7 @@ interface ApiService {
     ) : Call<GitHubUserResponse>
 
     @GET("search/users")
-    suspend fun getSearchUser(
+    suspend fun getUsersNew(
         @Query("q") username: String
     ): GitHubUserResponse
 
@@ -31,8 +31,17 @@ interface ApiService {
     fun getUserFollower(
         @Path("username") username: String
     ) : Call<List<User>>
+
+    @GET("users/{username}/followers")
+    suspend fun getUserFollowerNew(
+        @Path("username") username: String
+    ) : List<User>
     @GET("users/{username}/following")
     fun getUserFollowing(
         @Path("username") username: String
     ) :  Call<List<User>>
+    @GET("users/{username}/following")
+    suspend fun getUserFollowingNew(
+        @Path("username") username: String
+    ) :  List<User>
 }

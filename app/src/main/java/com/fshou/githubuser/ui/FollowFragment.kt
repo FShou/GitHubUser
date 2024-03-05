@@ -10,13 +10,17 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.FragmentFollowBinding
-
+import com.fshou.githubuser.ui.UserDetailActivity.Companion.username
+import com.fshou.githubuser.data.Result
 
 class FollowFragment : Fragment() {
 
     private var _binding: FragmentFollowBinding? = null
     private val binding get() =_binding
     private  val followViewModel by viewModels<FollowViewModel>()
+    private val viewModel by viewModels <FollowViewModelNew>{
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
 
     override fun onCreateView(
@@ -34,27 +38,35 @@ class FollowFragment : Fragment() {
         val index = arguments?.getInt(ARG_SECTION_NUMBER)
         if (index == 1) {
             // get Follower List show to ui
-            followViewModel.apply {
-                getFollowerByUserName(UserDetailActivity.username)
-                followerList.observe(viewLifecycleOwner) { setUserList(it) }
-                followerIsLoading.observe(viewLifecycleOwner) { showLoading(it) }
-                followerToastText.observe(viewLifecycleOwner) {
-                    it.getContentIfNotHandled()?.let { toastText ->
-                        Toast.makeText(requireContext(),toastText,Toast.LENGTH_SHORT).show()
-                    }
-                }
+//            followViewModel.apply {
+//                getFollowerByUserName(UserDetailActivity.username)
+//                followerList.observe(viewLifecycleOwner) { setUserList(it) }
+//                followerIsLoading.observe(viewLifecycleOwner) { showLoading(it) }
+//                followerToastText.observe(viewLifecycleOwner) {
+//                    it.getContentIfNotHandled()?.let { toastText ->
+//                        Toast.makeText(requireContext(),toastText,Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+            viewModel.apply {
+
+                followerList.observe(viewLifecycleOwner) { resultHandler(it) }
             }
         } else {
             // get following List show to ui
-            followViewModel.apply {
-                getFollowingByUserName(UserDetailActivity.username)
-                followingList.observe(viewLifecycleOwner) { setUserList(it) }
-                followingIsLoading.observe(viewLifecycleOwner) { showLoading(it) }
-                followingToastText.observe(viewLifecycleOwner) {
-                    it.getContentIfNotHandled()?.let { toastText ->
-                        Toast.makeText(requireContext(),toastText,Toast.LENGTH_SHORT).show()
-                    }
-                }
+//            followViewModel.apply {
+//                getFollowingByUserName(UserDetailActivity.username)
+//                followingList.observe(viewLifecycleOwner) { setUserList(it) }
+//                followingIsLoading.observe(viewLifecycleOwner) { showLoading(it) }
+//                followingToastText.observe(viewLifecycleOwner) {
+//                    it.getContentIfNotHandled()?.let { toastText ->
+//                        Toast.makeText(requireContext(),toastText,Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+            viewModel.apply {
+
+                followingList.observe(viewLifecycleOwner) { resultHandler(it) }
             }
         }
     }
@@ -63,6 +75,21 @@ class FollowFragment : Fragment() {
         _binding = null
     }
 
+
+private fun resultHandler(result: Result<List<User>>) {
+    when(result){
+        is Result.Loading -> binding?.progressBar?.visibility = View.VISIBLE
+        is Result.Error -> {
+            binding?.progressBar?.visibility = View.GONE
+            val message = result.error.getContentIfNotHandled()
+            Toast.makeText(requireActivity(),message,Toast.LENGTH_SHORT).show()
+        }
+        is Result.Success -> {
+            binding?.progressBar?.visibility = View.GONE
+            setUserList(result.data)
+        }
+    }
+}
 
     private fun setUserList(users: List<User>) {
         val userListAdapter = UserListAdapter(users)

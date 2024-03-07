@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import com.fshou.githubuser.databinding.ActivitySettingsBinding
-import com.fshou.githubuser.ui.view_model.SettingsViewModel
-import com.fshou.githubuser.ui.view_model.ViewModelFactory
+import com.fshou.githubuser.ui.viewModel.SettingsViewModel
+import com.fshou.githubuser.ui.viewModel.ViewModelFactory
 
 class SettingsActivity : AppCompatActivity() {
 

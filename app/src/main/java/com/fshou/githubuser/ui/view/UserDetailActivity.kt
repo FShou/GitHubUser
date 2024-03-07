@@ -15,8 +15,8 @@ import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.UserDetailResponse
 import com.fshou.githubuser.databinding.ActivityUserDetailBinding
 import com.fshou.githubuser.ui.adapter.SectionPagerAdapter
-import com.fshou.githubuser.ui.view_model.UserDetailViewModel
-import com.fshou.githubuser.ui.view_model.ViewModelFactory
+import com.fshou.githubuser.ui.viewModel.UserDetailViewModel
+import com.fshou.githubuser.ui.viewModel.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class UserDetailActivity : AppCompatActivity() {

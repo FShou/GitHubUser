@@ -1,4 +1,4 @@
-package com.fshou.githubuser.ui.view_model
+package com.fshou.githubuser.ui.viewModel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.FragmentFollowBinding
 import com.fshou.githubuser.data.Result
-import com.fshou.githubuser.ui.view_model.FollowViewModel
+import com.fshou.githubuser.ui.viewModel.FollowViewModel
 import com.fshou.githubuser.ui.adapter.UserListAdapter
-import com.fshou.githubuser.ui.view_model.ViewModelFactory
+import com.fshou.githubuser.ui.viewModel.ViewModelFactory
 
 class FollowFragment : Fragment() {
 

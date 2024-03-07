@@ -13,9 +13,9 @@ import com.fshou.githubuser.R
 import com.fshou.githubuser.data.Result
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityMainBinding
-import com.fshou.githubuser.ui.view_model.MainViewModel
+import com.fshou.githubuser.ui.viewModel.MainViewModel
 import com.fshou.githubuser.ui.adapter.UserListAdapter
-import com.fshou.githubuser.ui.view_model.ViewModelFactory
+import com.fshou.githubuser.ui.viewModel.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

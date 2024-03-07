@@ -10,9 +10,9 @@ import com.fshou.githubuser.R
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityFavoriteUserBinding
-import com.fshou.githubuser.ui.view_model.FavoriteUserViewModel
+import com.fshou.githubuser.ui.viewModel.FavoriteUserViewModel
 import com.fshou.githubuser.ui.adapter.UserListAdapter
-import com.fshou.githubuser.ui.view_model.ViewModelFactory
+import com.fshou.githubuser.ui.viewModel.ViewModelFactory
 
 class FavoriteUserActivity : AppCompatActivity() {
 

@@ -3,6 +3,7 @@ package com.fshou.githubuser.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fshou.githubuser.data.local.entity.FavoriteUser
@@ -21,12 +22,15 @@ class FavoriteUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteUserBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
 
         viewModel.getFavoriteUsers().observe(this@FavoriteUserActivity) {
             Log.d("FAVORITEUSER", it.toString())
             setUserList(it)
         }
+
+        binding.toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun setUserList(userList: List<FavoriteUser>) {

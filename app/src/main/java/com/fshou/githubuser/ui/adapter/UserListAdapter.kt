@@ -49,5 +49,8 @@ class UserListAdapter(private var userList: List<User>) :
             holder.itemView.context.startActivity(userDetailIntent)
 
         }
+        holder.binding.arrow.setOnClickListener {
+            holder.itemView.context.startActivity(userDetailIntent)
+        }
     }
 }

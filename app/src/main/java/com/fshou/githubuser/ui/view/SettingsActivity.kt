@@ -3,6 +3,7 @@ package com.fshou.githubuser.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CompoundButton
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import com.fshou.githubuser.databinding.ActivitySettingsBinding
@@ -18,7 +19,9 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
+
         viewModel.getThemeSettings().observe(this) {
             if (it){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -31,5 +34,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.swicthDarkMode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
         }
+
+        binding.toolbar.setNavigationOnClickListener { finish() }
     }
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    card_view:cardCornerRadius="8dp"
-    android:layout_gravity="center"
-    >
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    style="@style/Widget.Material3.CardView.Elevated"
+>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,9 +17,9 @@
 
         <ImageView
             android:id="@+id/img_avatar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:contentDescription="@string/avatar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -26,20 +27,23 @@
 
         <TextView
             android:id="@+id/tv_user_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:text="@string/username"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="@+id/img_avatar"
             card_view:layout_constraintStart_toEndOf="@+id/img_avatar"
-            card_view:layout_constraintTop_toTopOf="@+id/img_avatar" />
+            card_view:layout_constraintTop_toTopOf="@+id/img_avatar"
+            card_view:layout_constraintEnd_toEndOf="@id/arrow"
+            />
 
-        <TextView
+        <Button
             android:id="@+id/arrow"
+            style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:drawableStartCompat="@drawable/round_arrow_forward_ios_24"
+            card_view:icon="@drawable/round_arrow_forward_ios_24"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
@@ -47,4 +51,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

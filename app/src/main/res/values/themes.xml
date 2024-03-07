@@ -2,7 +2,56 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.GitHubUser" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/darkblue</item>
+        <item name="colorPrimary">#2B638B</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#CCE5FF</item>
+        <item name="colorOnPrimaryContainer">#001E31</item>
+        <item name="colorPrimaryFixed">#CCE5FF</item>
+        <item name="colorOnPrimaryFixed">#001E31</item>
+        <item name="colorPrimaryFixedDim">#98CCF9</item>
+        <item name="colorOnPrimaryFixedVariant">#054B72</item>
+
+        <item name="colorSecondary">#51606F</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSecondaryContainer">#D4E4F6</item>
+        <item name="colorOnSecondaryContainer">#0D1D2A</item>
+        <item name="colorSecondaryFixed">#D4E4F6</item>
+        <item name="colorOnSecondaryFixed">#0D1D2A</item>
+        <item name="colorSecondaryFixedDim">#B8C8DA</item>
+        <item name="colorOnSecondaryFixedVariant">#394857</item>
+        <item name="android:colorBackground">#F7F9FF</item>
+
+        <item name="colorTertiary">#66587B</item>
+        <item name="colorOnTertiary">#FFFFFF</item>
+        <item name="colorTertiaryContainer">#ECDCFF</item>
+        <item name="colorOnTertiaryContainer">#211534</item>
+        <item name="colorTertiaryFixed">#ECDCFF</item>
+        <item name="colorOnTertiaryFixed">#211534</item>
+        <item name="colorTertiaryFixedDim">#D1BFE7</item>
+        <item name="colorOnTertiaryFixedVariant">#4E4162</item>
+
+        <item name="colorSurface">#F7F9FF </item>
+        <item name="colorOnSurface">#181C20</item>
+        <item name="colorSurfaceBright">#F7F9FF</item>
+        <item name="colorOnSurfaceVariant">#42474E</item>
+        <item name="colorSurfaceDim">#D7DADF</item>
+
+        <item name="colorOutline">#72787E</item>
+        <item name="colorOutlineVariant">#C2C7CE</item>
+
+        <item name="colorSurfaceContainerLowest">#FFFFFF</item>
+        <item name="colorSurfaceContainerLow">#F1F4F9</item>
+        <item name="colorSurfaceContainer">#EBEEF3</item>
+        <item name="colorSurfaceContainerHigh">#E6E8EE</item>
+        <item name="colorSurfaceContainerHighest">#E0E2E8</item>
+
+        <item name="colorSurfaceInverse">#2D3135</item>
+        <item name="colorOnSurfaceInverse">#EEF1F6</item>
+        <item name="colorPrimaryInverse">#98CCF9</item>
+
+
+
+
     </style>
 
     <style name="Theme.GitHubUser" parent="Base.Theme.GitHubUser" />

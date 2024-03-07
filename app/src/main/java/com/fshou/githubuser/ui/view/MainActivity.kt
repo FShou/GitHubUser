@@ -58,8 +58,7 @@ class MainActivity : AppCompatActivity() {
                 searchView.hide()
                 false
             }
-            searchBar.inflateMenu(R.menu.favorite_menu)
-            searchBar.setOnMenuItemClickListener {
+            topBar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.favorite_user -> {
                         val intent = Intent(this@MainActivity, FavoriteUserActivity::class.java)

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
@@ -69,6 +70,8 @@ class UserDetailActivity : AppCompatActivity() {
                 setFabIcon(!isFavorite)
             }
         }
+        binding.toolbar.setNavigationOnClickListener { finish() }
+
 
         val sectionsPagerAdapter = SectionPagerAdapter(this@UserDetailActivity)
         binding.apply {
@@ -78,7 +81,7 @@ class UserDetailActivity : AppCompatActivity() {
             }.attach()
         }
 
-
+        enableEdgeToEdge()
         setContentView(binding.root)
     }
 

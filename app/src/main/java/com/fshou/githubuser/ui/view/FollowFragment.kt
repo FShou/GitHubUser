@@ -76,6 +76,7 @@ class FollowFragment : Fragment() {
             addIntent = false
         }
         binding?.rvFollower?.apply {
+            setHasFixedSize(true)
             layoutManager = rvFollowerLayoutManager
             adapter = userListAdapter
         }

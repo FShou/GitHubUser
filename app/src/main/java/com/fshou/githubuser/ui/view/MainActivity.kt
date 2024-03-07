@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUserList(userList: List<User>) {
         if (userList.isEmpty()){
-            binding.nothing.text = "User Not Found"
+            binding.nothing.text = getString(R.string.user_not_found)
             binding.nothing.visibility = View.VISIBLE
             binding.rvUserList.visibility = View.GONE
             return

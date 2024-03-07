@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fshou.githubuser.R
 import com.fshou.githubuser.data.local.entity.FavoriteUser
 import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityFavoriteUserBinding
@@ -27,7 +28,6 @@ class FavoriteUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.getFavoriteUsers().observe(this@FavoriteUserActivity) {
-            Log.d("FAVORITEUSER", it.toString())
             setUserList(it)
         }
 
@@ -36,7 +36,7 @@ class FavoriteUserActivity : AppCompatActivity() {
 
     private fun setUserList(userList: List<FavoriteUser>) {
         if (userList.isEmpty()){
-            binding.nothing.text = "You have no Favorite user"
+            binding.nothing.text = getString(R.string.no_favorite_user)
             binding.nothing.visibility = View.VISIBLE
             binding.rvUserList.visibility = View.GONE
             return
@@ -50,7 +50,7 @@ class FavoriteUserActivity : AppCompatActivity() {
 
         }
 
-        Log.d("USERLIST", users.toString())
+
         val userListAdapter = UserListAdapter(users)
         binding.rvUserList.apply {
             layoutManager = LinearLayoutManager(this@FavoriteUserActivity)

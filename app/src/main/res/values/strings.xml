@@ -14,4 +14,6 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="nothing_here">NOthing here</string>
     <string name="open_in_browser">Open in browser</string>
+    <string name="user_not_found">User Not Found</string>
+    <string name="no_favorite_user">You have no Favorite user</string>
 </resources>

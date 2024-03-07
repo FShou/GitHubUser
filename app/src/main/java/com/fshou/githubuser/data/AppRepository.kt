@@ -1,6 +1,5 @@
 package com.fshou.githubuser.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.fshou.githubuser.data.local.datastore.SettingPreferences
@@ -32,17 +31,15 @@ class AppRepository private constructor(
     suspend fun isFavoriteUser(username: String): Boolean = favoriteUserDao.isFavoriteUser(username)
 
     // Retrofit
-    fun getUserDetail(username: String): LiveData<Result<UserDetailResponse>> =
-        liveData {
-            emit(Result.Loading)
-            try {
-                val userDetailResponse = apiService.getUserDetail(username)
-                emit(Result.Success(userDetailResponse))
-            } catch (e: Exception) {
-                Log.d("getUserDetaili", e.message.toString())
-                emit(Result.Error(Event(e.message.toString())))
-            }
+    fun getUserDetail(username: String): LiveData<Result<UserDetailResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val userDetailResponse = apiService.getUserDetail(username)
+            emit(Result.Success(userDetailResponse))
+        } catch (e: Exception) {
+            emit(Result.Error(Event(e.message.toString())))
         }
+    }
 
     suspend fun getUsers(username: String): List<User> {
         val gitHubUserResponse = apiService.getUsers(username)
@@ -54,10 +51,8 @@ class AppRepository private constructor(
         emit(Result.Loading)
         try {
             val followers = apiService.getUserFollowers(username)
-            Log.d("getFollowers[REPO)", followers.toString())
             emit(Result.Success(followers))
         } catch (e: Exception) {
-            Log.d("getFollower[REPO)", e.message.toString())
             emit(Result.Error(Event(e.message.toString())))
         }
     }
@@ -66,10 +61,8 @@ class AppRepository private constructor(
         emit(Result.Loading)
         try {
             val followers: List<User> = apiService.getUserFollowing(username)
-            Log.d("getFollowing[REPO)", followers.toString())
             emit(Result.Success(followers))
         } catch (e: Exception) {
-            Log.d("getFollowing[REPO)", e.message.toString())
             emit(Result.Error(Event(e.message.toString())))
         }
     }
@@ -81,10 +74,9 @@ class AppRepository private constructor(
             apiService: ApiService,
             favoriteUserDao: FavoriteUserDao,
             settingPreferences: SettingPreferences
-        ): AppRepository =
-            instance ?: synchronized(this) {
-                instance ?: AppRepository(apiService, favoriteUserDao, settingPreferences)
-            }.also { instance = it }
+        ): AppRepository = instance ?: synchronized(this) {
+            instance ?: AppRepository(apiService, favoriteUserDao, settingPreferences)
+        }.also { instance = it }
 
     }
 

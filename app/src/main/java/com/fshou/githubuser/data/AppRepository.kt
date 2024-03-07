@@ -13,7 +13,7 @@ import com.fshou.githubuser.utils.Event
 import kotlinx.coroutines.flow.Flow
 
 
-class FavoriteUserRepository private constructor(
+class AppRepository private constructor(
     private val apiService: ApiService,
     private val favoriteUserDao: FavoriteUserDao,
     private val settingPreferences: SettingPreferences
@@ -21,14 +21,14 @@ class FavoriteUserRepository private constructor(
     ) {
     companion object {
         @Volatile
-        private var instance: FavoriteUserRepository? = null
+        private var instance: AppRepository? = null
         fun getInstance(
             apiService: ApiService,
             favoriteUserDao: FavoriteUserDao,
             settingPreferences: SettingPreferences
-        ): FavoriteUserRepository =
+        ): AppRepository =
             instance ?: synchronized(this) {
-                instance ?: FavoriteUserRepository(apiService, favoriteUserDao, settingPreferences)
+                instance ?: AppRepository(apiService, favoriteUserDao, settingPreferences)
             }.also { instance = it }
 
     }
@@ -41,7 +41,8 @@ class FavoriteUserRepository private constructor(
     suspend fun addUser(user: FavoriteUser)  = favoriteUserDao.addUser(user)
     suspend fun deleteUser(user: FavoriteUser) = favoriteUserDao.deleteUser(user)
     fun getFavoriteUsers(): LiveData<List<FavoriteUser>> = favoriteUserDao.getFavoriteUsers()
-    fun isFavoriteUser(username: String): LiveData<Boolean> = liveData { emit(favoriteUserDao.isFavoriteUser(username)) }
+
+    suspend fun isFavoriteUser(username: String): Boolean = favoriteUserDao.isFavoriteUser(username)
 
     // Retrofit
     fun getUserDetail(username: String): LiveData<Result<UserDetailResponse>> =

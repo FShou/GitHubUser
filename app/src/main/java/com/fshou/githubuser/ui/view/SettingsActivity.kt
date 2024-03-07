@@ -34,6 +34,9 @@ class SettingsActivity : AppCompatActivity() {
         binding.swicthDarkMode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
         }
+        binding.darkmodeSetting.setOnClickListener {
+            binding.swicthDarkMode.isChecked = !binding.swicthDarkMode.isChecked
+        }
 
         binding.toolbar.setNavigationOnClickListener { finish() }
     }

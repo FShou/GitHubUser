@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/darkmode_setting"
                 android:layout_width="match_parent"
                 android:layout_margin="16dp"
                 style="@style/Widget.Material3.CardView.Filled"

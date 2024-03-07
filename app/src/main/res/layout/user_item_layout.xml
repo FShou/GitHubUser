@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="6dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginBottom="6dp"
     style="@style/Widget.Material3.CardView.Elevated"
 >
 
@@ -15,10 +16,12 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_avatar"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            card_view:civ_border_color="?attr/colorOnSecondaryContainer"
+            card_view:civ_circle_background_color="@color/white"
             android:contentDescription="@string/avatar"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"

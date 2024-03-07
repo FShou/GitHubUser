@@ -3,6 +3,7 @@ package com.fshou.githubuser.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,13 @@ class FavoriteUserActivity : AppCompatActivity() {
     }
 
     private fun setUserList(userList: List<FavoriteUser>) {
+        if (userList.isEmpty()){
+            binding.nothing.visibility = View.VISIBLE
+            binding.rvUserList.visibility = View.GONE
+            return
+        }
+        binding.rvUserList.visibility = View.VISIBLE
+        binding.nothing.visibility = View.GONE
         val users = arrayListOf<User>()
         userList.forEach {
             val user = User(login = it.username , avatarUrl = it.avatarUrl)

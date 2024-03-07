@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(application)
     }
-    private val settingsViewModel by viewModels<SettingsViewModel> {
-        ViewModelFactory.getInstance(application)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.searchedUser.observe(this@MainActivity) {
             resultHandle(it)
         }
-        settingsViewModel.getThemeSettings().observe(this) {
+        viewModel.getThemeSettings().observe(this) {
             if (it){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }else{
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         // configure search bar & searchview
         binding.apply {
-            searchView.setupWithSearchBar(searchBar)
+//            searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 searchBar.textView.text = searchView.text
                 if (searchBar.textView.text.toString() == "") {

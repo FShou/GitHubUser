@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.fshou.githubuser.R
 import com.fshou.githubuser.data.Result
@@ -17,7 +16,6 @@ import com.fshou.githubuser.ui.adapter.SectionPagerAdapter
 import com.fshou.githubuser.ui.view_model.UserDetailViewModel
 import com.fshou.githubuser.ui.view_model.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.launch
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -33,7 +31,7 @@ class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserDetailBinding
     private val user = FavoriteUser()
-    private val viewModelNew: UserDetailViewModel by viewModels {
+    private val viewModel: UserDetailViewModel by viewModels {
         ViewModelFactory.getInstance(
             application
         )
@@ -46,28 +44,19 @@ class UserDetailActivity : AppCompatActivity() {
 
         username = intent.getStringExtra(EXTRA_USERNAME).toString()
 
-        viewModelNew.apply {
+        viewModel.apply {
             userDetail.observe(this@UserDetailActivity) {
                 handleUserDetail(it)
             }
 
-            isFavoriteUser(username).observe(this@UserDetailActivity) { itFavorite ->
-                setFabIcon(itFavorite)
-            }
+            isFavorite.observe(this@UserDetailActivity) { setFabIcon(it) }
         }
 
         binding.fab.setOnClickListener {
-            viewModelNew.isFavoriteUser(username).observe(this@UserDetailActivity) { isFavorite ->
-                if (isFavorite) {
-                    viewModelNew.viewModelScope.launch {
-                        viewModelNew.deleteUser(user)
-                    }
-                } else {
-                    viewModelNew.viewModelScope.launch {
-                        viewModelNew.addUser(user)
-                    }
-                }
-                setFabIcon(!isFavorite)
+            if(viewModel.isFavorite.value == true) {
+                viewModel.deleteUser(user)
+            }else {
+                viewModel.addUser(user)
             }
         }
         binding.toolbar.setNavigationOnClickListener { finish() }
@@ -110,6 +99,7 @@ class UserDetailActivity : AppCompatActivity() {
 
             is Result.Success -> {
                 binding.progressBar.visibility = View.GONE
+                binding.fab.visibility = View.VISIBLE
                 user.username = result.data.login
                 user.avatarUrl = result.data.avatarUrl
                 showUserDetail(result.data)

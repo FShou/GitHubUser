@@ -20,6 +20,7 @@ class UserListAdapter(private var userList: List<User>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = UserItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ListViewHolder(binding)
     }
 

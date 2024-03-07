@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             app:liftOnScrollColor="?attr/colorSurfaceBright"
-            app:layout_scrollFlags="scroll"
+            app:layout_scrollFlags="scroll|enterAlways"
             >
 
 
@@ -140,6 +140,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:contentDescription="@string/favorite" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

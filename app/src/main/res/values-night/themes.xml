@@ -22,7 +22,6 @@
         <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
         <item name="android:colorBackground">@color/md_theme_dark_background</item>
         <item name="colorOnBackground">@color/md_theme_dark_onBackground</item>
-
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
 
 

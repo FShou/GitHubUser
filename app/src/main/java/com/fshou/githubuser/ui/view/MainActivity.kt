@@ -15,7 +15,6 @@ import com.fshou.githubuser.data.remote.response.User
 import com.fshou.githubuser.databinding.ActivityMainBinding
 import com.fshou.githubuser.ui.view_model.MainViewModel
 import com.fshou.githubuser.ui.adapter.UserListAdapter
-import com.fshou.githubuser.ui.view_model.SettingsViewModel
 import com.fshou.githubuser.ui.view_model.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -97,6 +96,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUserList(userList: List<User>) {
+        if (userList.isEmpty()){
+            binding.nothing.text = "User Not Found"
+            binding.nothing.visibility = View.VISIBLE
+            binding.rvUserList.visibility = View.GONE
+            return
+        }
+        binding.rvUserList.visibility = View.VISIBLE
+        binding.nothing.visibility = View.GONE
         val userListAdapter = UserListAdapter(userList)
         binding.rvUserList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)

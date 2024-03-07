@@ -13,7 +13,6 @@ object Injection {
         val database = FavoriteUserRoomDatabase.getDatabase(context)
         val dao = database.favoriteUserDao()
         val settingPreferences = SettingPreferences.getInstance(context.dataStore)
-//        val appExecutors = AppExecutors()
         return AppRepository.getInstance(apiService, dao, settingPreferences)
     }
 }

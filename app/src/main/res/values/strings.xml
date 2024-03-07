@@ -13,4 +13,5 @@
     <string name="avatar">Avatar</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="nothing_here">NOthing here</string>
+    <string name="open_in_browser">Open in browser</string>
 </resources>

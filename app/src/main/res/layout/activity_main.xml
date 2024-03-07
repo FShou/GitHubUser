@@ -24,7 +24,7 @@
         app:titleCentered="true"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:layout_scrollEffect="compress"
-        app:menu="@menu/favorite_menu"
+        app:menu="@menu/main_menu"
         app:navigationIconTint="?attr/colorPrimary"
         />
 
@@ -47,20 +47,37 @@
         app:layout_anchor="@id/searchBar"
         android:hint="@string/searchbar_hint"/>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
 
-    </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/nothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.25"
+            android:text="@string/nothing_here"
+            android:visibility="gone"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"

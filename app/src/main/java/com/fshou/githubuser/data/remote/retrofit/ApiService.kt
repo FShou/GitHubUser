@@ -17,7 +17,7 @@ interface ApiService {
     ) : UserDetailResponse
 
     @GET("users/{username}/followers")
-    suspend fun getUserFollower(
+    suspend fun getUserFollowers(
         @Path("username") username: String
     ) : List<User>
 

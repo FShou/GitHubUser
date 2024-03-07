@@ -1,5 +1,7 @@
 package com.fshou.githubuser.ui.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,14 +22,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 class UserDetailActivity : AppCompatActivity() {
 
 
-    companion object {
-        const val EXTRA_USERNAME = "username"
-        lateinit var username: String
-        private val TAB_TITLE = intArrayOf(
-            R.string.follower,
-            R.string.following
-        )
-    }
 
     private lateinit var binding: ActivityUserDetailBinding
     private val user = FavoriteUser()
@@ -59,7 +53,7 @@ class UserDetailActivity : AppCompatActivity() {
                 viewModel.addUser(user)
             }
         }
-        binding.toolbar.setNavigationOnClickListener { finish() }
+
 
 
         val sectionsPagerAdapter = SectionPagerAdapter(this@UserDetailActivity)
@@ -128,7 +122,28 @@ class UserDetailActivity : AppCompatActivity() {
                 .load(user.avatarUrl)
                 .circleCrop()
                 .into(imgAvatar)
+
+            val url = "https://github.com/${user.login}"
+            val share = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            toolbar.apply {
+                setNavigationOnClickListener { finish() }
+                setOnMenuItemClickListener {
+                    if(it.itemId == R.id.open_in_browser) {
+                        startActivity(share)
+                    }
+                    false
+                }
+            }
         }
+    }
+
+    companion object {
+        const val EXTRA_USERNAME = "username"
+        lateinit var username: String
+        private val TAB_TITLE = intArrayOf(
+            R.string.follower,
+            R.string.following
+        )
     }
 
 }

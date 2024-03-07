@@ -8,7 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_follower"
+        android:id="@+id/rv_user_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,15 +16,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/nothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/nothing_here"
+        android:visibility="gone"
+        app:layout_constraintVertical_bias="0.25"
+        tools:visibility="visible"
+        />
+
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/rv_follower"
-        app:layout_constraintEnd_toEndOf="@id/rv_follower"
-        app:layout_constraintStart_toStartOf="@id/rv_follower"
-        app:layout_constraintTop_toTopOf="@id/rv_follower"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ import com.fshou.githubuser.ui.view.UserDetailActivity
 
 class SectionPagerAdapter(activity: UserDetailActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2
-
     override fun createFragment(position: Int): Fragment {
         val fragment = FollowFragment()
         fragment.arguments = Bundle().apply {

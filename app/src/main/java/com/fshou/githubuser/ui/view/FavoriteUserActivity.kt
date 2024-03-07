@@ -36,6 +36,7 @@ class FavoriteUserActivity : AppCompatActivity() {
 
     private fun setUserList(userList: List<FavoriteUser>) {
         if (userList.isEmpty()){
+            binding.nothing.text = "You have no Favorite user"
             binding.nothing.visibility = View.VISIBLE
             binding.rvUserList.visibility = View.GONE
             return

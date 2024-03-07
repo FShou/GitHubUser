@@ -38,9 +38,9 @@ class FollowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val index = arguments?.getInt(ARG_SECTION_NUMBER)
         if (index == 1) {
-            viewModel.followerList.observe(viewLifecycleOwner) { resultHandler(it) }
+            viewModel.followerList.observe(viewLifecycleOwner) { resultHandler(it, 1 ) }
         } else {
-            viewModel.followingList.observe(viewLifecycleOwner) { resultHandler(it) }
+            viewModel.followingList.observe(viewLifecycleOwner) { resultHandler(it, 2 ) }
 
         }
     }
@@ -51,7 +51,7 @@ class FollowFragment : Fragment() {
     }
 
 
-    private fun resultHandler(result: Result<List<User>>) {
+    private fun resultHandler(result: Result<List<User>>, sectionNumber: Int ) {
         when (result) {
             is Result.Loading -> binding?.progressBar?.visibility = View.VISIBLE
             is Result.Error -> {
@@ -62,12 +62,25 @@ class FollowFragment : Fragment() {
 
             is Result.Success -> {
                 binding?.progressBar?.visibility = View.GONE
-                setUserList(result.data)
+                setUserList(result.data, sectionNumber)
             }
         }
     }
 
-    private fun setUserList(users: List<User>) {
+    private fun setUserList(users: List<User>, sectionNumber: Int) {
+        if (users.isEmpty()){
+            binding?.nothing?.text =if (sectionNumber == 1){
+                "This user doesn't have Follower"
+            }else {
+                "This user doesn't Follow anyone"
+            }
+            binding?.nothing?.visibility = View.VISIBLE
+            binding?.rvUserList?.visibility = View.GONE
+            return
+        }
+        binding?.rvUserList?.visibility = View.VISIBLE
+        binding?.nothing?.visibility = View.GONE
+
         val userListAdapter = UserListAdapter(users)
         val rvFollowerLayoutManager = LinearLayoutManager(requireActivity())
 
@@ -75,7 +88,7 @@ class FollowFragment : Fragment() {
             showArrow = false
             addIntent = false
         }
-        binding?.rvFollower?.apply {
+        binding?.rvUserList?.apply {
             setHasFixedSize(true)
             layoutManager = rvFollowerLayoutManager
             adapter = userListAdapter

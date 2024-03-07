@@ -18,27 +18,14 @@ class AppRepository private constructor(
     private val favoriteUserDao: FavoriteUserDao,
     private val settingPreferences: SettingPreferences
 
-    ) {
-    companion object {
-        @Volatile
-        private var instance: AppRepository? = null
-        fun getInstance(
-            apiService: ApiService,
-            favoriteUserDao: FavoriteUserDao,
-            settingPreferences: SettingPreferences
-        ): AppRepository =
-            instance ?: synchronized(this) {
-                instance ?: AppRepository(apiService, favoriteUserDao, settingPreferences)
-            }.also { instance = it }
-
-    }
-
+) {
     // Settings Preference
     fun getThemeSetting(): Flow<Boolean> = settingPreferences.getThemeSetting()
-    suspend fun saveThemeSetting(isDarkMode: Boolean) = settingPreferences.saveThemeSetting(isDarkMode)
+    suspend fun saveThemeSetting(isDarkMode: Boolean) =
+        settingPreferences.saveThemeSetting(isDarkMode)
 
-   // Room
-    suspend fun addUser(user: FavoriteUser)  = favoriteUserDao.addUser(user)
+    // Room
+    suspend fun addUser(user: FavoriteUser) = favoriteUserDao.addUser(user)
     suspend fun deleteUser(user: FavoriteUser) = favoriteUserDao.deleteUser(user)
     fun getFavoriteUsers(): LiveData<List<FavoriteUser>> = favoriteUserDao.getFavoriteUsers()
 
@@ -56,7 +43,8 @@ class AppRepository private constructor(
                 emit(Result.Error(Event(e.message.toString())))
             }
         }
-    suspend fun getUsers(username: String) : List<User> {
+
+    suspend fun getUsers(username: String): List<User> {
         val gitHubUserResponse = apiService.getUsers(username)
         val users = gitHubUserResponse.items
         return users as List<User>
@@ -65,8 +53,8 @@ class AppRepository private constructor(
     fun getFollowers(username: String): LiveData<Result<List<User>>> = liveData {
         emit(Result.Loading)
         try {
-            val followers = apiService.getUserFollower(username)
-            Log.d("getFollowers[REPO)",followers.toString())
+            val followers = apiService.getUserFollowers(username)
+            Log.d("getFollowers[REPO)", followers.toString())
             emit(Result.Success(followers))
         } catch (e: Exception) {
             Log.d("getFollower[REPO)", e.message.toString())
@@ -78,7 +66,7 @@ class AppRepository private constructor(
         emit(Result.Loading)
         try {
             val followers: List<User> = apiService.getUserFollowing(username)
-            Log.d("getFollowing[REPO)",followers.toString())
+            Log.d("getFollowing[REPO)", followers.toString())
             emit(Result.Success(followers))
         } catch (e: Exception) {
             Log.d("getFollowing[REPO)", e.message.toString())
@@ -86,6 +74,18 @@ class AppRepository private constructor(
         }
     }
 
+    companion object {
+        @Volatile
+        private var instance: AppRepository? = null
+        fun getInstance(
+            apiService: ApiService,
+            favoriteUserDao: FavoriteUserDao,
+            settingPreferences: SettingPreferences
+        ): AppRepository =
+            instance ?: synchronized(this) {
+                instance ?: AppRepository(apiService, favoriteUserDao, settingPreferences)
+            }.also { instance = it }
 
+    }
 
 }
